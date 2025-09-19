@@ -1,0 +1,48 @@
+
+10_Noel.png
+size: 996,428
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cloud
+  rotate: false
+  xy: 453, 2
+  size: 200, 114
+  orig: 200, 114
+  offset: 0, 0
+  index: -1
+cloud copy
+  rotate: false
+  xy: 685, 22
+  size: 300, 171
+  orig: 300, 171
+  offset: 0, 0
+  index: -1
+santa_claus
+  rotate: true
+  xy: 2, 25
+  size: 400, 217
+  orig: 400, 217
+  offset: 0, 0
+  index: -1
+trang_thai_nhap_nhay1
+  rotate: false
+  xy: 453, 118
+  size: 230, 307
+  orig: 230, 307
+  offset: 0, 0
+  index: -1
+trang_thai_nhap_nhay2
+  rotate: true
+  xy: 685, 195
+  size: 230, 307
+  orig: 230, 307
+  offset: 0, 0
+  index: -1
+trang_thai_tat_tat_ca_bong
+  rotate: false
+  xy: 221, 106
+  size: 230, 319
+  orig: 230, 319
+  offset: 0, 0
+  index: -1

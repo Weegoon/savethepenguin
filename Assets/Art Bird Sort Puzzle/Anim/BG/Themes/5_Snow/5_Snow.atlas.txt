@@ -1,0 +1,48 @@
+
+5_Snow.png
+size: 444,192
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 2, 23
+  size: 100, 135
+  orig: 100, 135
+  offset: 0, 0
+  index: -1
+cloud1
+  rotate: false
+  xy: 139, 2
+  size: 283, 54
+  orig: 283, 54
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 139, 58
+  size: 248, 65
+  orig: 248, 65
+  offset: 0, 0
+  index: -1
+cloud3
+  rotate: false
+  xy: 2, 125
+  size: 440, 65
+  orig: 440, 65
+  offset: 0, 0
+  index: -1
+leg
+  rotate: true
+  xy: 415, 84
+  size: 39, 11
+  orig: 39, 11
+  offset: 0, 0
+  index: -1
+wing
+  rotate: false
+  xy: 389, 61
+  size: 24, 62
+  orig: 24, 62
+  offset: 0, 0
+  index: -1
