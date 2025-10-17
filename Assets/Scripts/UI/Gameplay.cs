@@ -34,6 +34,9 @@ public class Gameplay : MonoBehaviour
 
     public void UpdateScoreUI()
     {
-        scoreText.text = UIController.instance.Levelplay.CurrentScore.ToString();
+        scoreText.text = "Score \n" + UIController.instance.Levelplay.CurrentScore.ToString();
+
+        if (UIController.instance.Levelplay.CurrentScore > UIController.instance.Levelplay.HighScore)
+            UIController.instance.Levelplay.HighScore = UIController.instance.Levelplay.CurrentScore;
     }
 }

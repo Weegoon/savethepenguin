@@ -9,6 +9,8 @@ public class Level : MonoBehaviour
 
     public GameObject TrapPrefab;
 
+    public Penguin PlayerPenguin;
+
     public GameObject TargetPenguin;
 
     public List<Transform> PenguinPaths;
@@ -70,6 +72,7 @@ public class Level : MonoBehaviour
         while (!isLose)
         {
             yield return new WaitForSeconds(GetTimeToSpawnItem());
+            yield return new WaitUntil(() => !PlayerPenguin.isDie);
             SpawnItem();
         }
     }
