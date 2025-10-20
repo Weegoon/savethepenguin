@@ -15,8 +15,10 @@ public class Penguin : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public float dirSwitchThreshold = 0.15f; // ngưỡng đổi hướng để tránh rung
+    public float mouseMoveThreshold = 0.15f; // chuột phải di chuyển tối thiểu mới cho đổi hướng
     private int lastMoveDir = 0;
+    private float lastMouseX;
+    private bool mouseLocked = false;        // đã “khóa” hướng theo vị trí chuột hiện tại chưa
 
     public bool isDie;
 
@@ -31,19 +33,37 @@ public class Penguin : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float dx = mousePos.x - transform.position.x;
+            float mouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
 
-            // Cập nhật hướng khi chuột đủ lệch về 1 phía
-            if (Mathf.Abs(dx) > dirSwitchThreshold)
-                lastMoveDir = (dx > 0f) ? 1 : -1;
+            // Lần đầu giữ chuột -> chốt hướng theo vị trí chuột lúc này
+            if (!mouseLocked)
+            {
+                float dx0 = mouseX - transform.position.x;
+                if (Mathf.Abs(dx0) > stopDistance)
+                {
+                    lastMoveDir = (dx0 > 0f) ? 1 : -1;
+                    mouseLocked = true;
+                    lastMouseX = mouseX;
+                }
+            }
+            else
+            {
+                // Chỉ cho đổi hướng khi người chơi kéo chuột đủ xa
+                if (Mathf.Abs(mouseX - lastMouseX) > mouseMoveThreshold)
+                {
+                    float dx = mouseX - transform.position.x;
+                    if (Mathf.Abs(dx) > stopDistance)
+                    {
+                        lastMoveDir = (dx > 0f) ? 1 : -1;
+                        lastMouseX = mouseX;
+                    }
+                }
+            }
 
-            // Nếu chưa có hướng (mới nhấn chuột mà gần), mặc định không làm gì
+            // Nếu đã có hướng -> tiếp tục chạy đều (KHÔNG dừng khi tới gần chuột)
             if (lastMoveDir != 0)
             {
                 float targetVx = lastMoveDir * moveSpeed;
-
-                // Tiệm cận vận tốc đều bằng AddForce -> có quán tính mềm khi đổi hướng
                 float diff = targetVx - rb.velocity.x;
                 rb.AddForce(new Vector2(diff * accel, 0f));
 
@@ -56,10 +76,12 @@ public class Penguin : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
+            // Thả chuột -> dừng & reset (nếu muốn thả vẫn chạy, hãy bỏ 3 dòng đầu)
             rb.velocity = Vector2.zero;
             jumpAnim.transform.eulerAngles = new Vector3(0, 0, 0f);
             lastMoveDir = 0;
-        }        
+            mouseLocked = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,7 +103,11 @@ public class Penguin : MonoBehaviour
             impactEffect.transform.position = closestPoint;
             impactEffect.PlayEffect();
 
-            DieEffect();
+            Utility.Delay(this, delegate
+            {
+                isDie = true;
+                DieEffect();
+            }, 0.2f);
 
             Destroy(collision.gameObject);
         }
@@ -89,7 +115,6 @@ public class Penguin : MonoBehaviour
 
     void DieEffect ()
     {
-        isDie = true;
         rb.velocity = Vector2.zero;
         jumpAnim.transform.eulerAngles = new Vector3(0, 0, 0f);
 
