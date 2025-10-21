@@ -31,6 +31,8 @@ public class Penguin : MonoBehaviour
     {
         if (isDie) return;
 
+        if (!UIController.instance.Gameplay.tutorialShowed) return;
+
         if (Input.GetMouseButton(0))
         {
             float mouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
@@ -94,6 +96,8 @@ public class Penguin : MonoBehaviour
             earnEffect.transform.position = closestPoint;
             earnEffect.PlayEffect();
 
+            SoundManager.instance.PlayAudioClip(SoundManager.instance.earnItem);
+
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("TrapItem"))
@@ -108,6 +112,8 @@ public class Penguin : MonoBehaviour
                 isDie = true;
                 DieEffect();
             }, 0.2f);
+
+            SoundManager.instance.PlayAudioClip(SoundManager.instance.trapHit);
 
             Destroy(collision.gameObject);
         }

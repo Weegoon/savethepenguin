@@ -69,6 +69,7 @@ public class Level : MonoBehaviour
 
     IEnumerator IESpawnItem()
     {
+        yield return new WaitUntil(() => UIController.instance.Gameplay.tutorialShowed);
         while (!isLose)
         {
             yield return new WaitForSeconds(GetTimeToSpawnItem());

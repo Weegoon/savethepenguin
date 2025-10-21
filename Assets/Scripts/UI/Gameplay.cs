@@ -7,14 +7,21 @@ public class Gameplay : MonoBehaviour
 {
     [SerializeField] GameObject levelPlay;
 
+    [SerializeField] GameObject tutorialObj;
+
     [SerializeField] List<GameObject> heartObjs;
 
     [SerializeField] Text scoreText;
+
+    public bool tutorialShowed;
 
     public void OnOpen()
     {
         gameObject.SetActive(true);
         levelPlay.SetActive(true);
+
+        if (!tutorialShowed)
+            ShowTutorial();
     }
 
     public void OnClose()
@@ -22,6 +29,16 @@ public class Gameplay : MonoBehaviour
         levelPlay.SetActive(false);
         gameObject.SetActive(false);
 
+    }
+
+    void ShowTutorial()
+    {
+        tutorialObj.SetActive(true);
+        Utility.Delay(this, delegate
+        {
+            tutorialShowed = true;
+            tutorialObj.SetActive(false);
+        }, 3f);
     }
 
     public void UpdateLifeUI()
