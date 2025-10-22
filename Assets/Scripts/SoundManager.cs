@@ -10,9 +10,6 @@ public class SoundManager : MonoBehaviour
 
     [Space(10)]
     public List<AudioClip> listMusicGamePlay;
-    public List<AudioClip> listMusicMainMenu;
-    public List<AudioClip> listMusicSelectLevel;
-    public List<AudioClip> listMusicRoom;
 
     [Space(10), SerializeField] AudioSource audioSource;
     [SerializeField] AudioSource backgroundSound;
@@ -76,27 +73,7 @@ public class SoundManager : MonoBehaviour
     {
         volSound = 1;
         SoundBackground();
-    }
-    public void UpdateSoundBG()
-    {
-        if (!haveSound) return;
-        if (musicEnable)
-        {
-            if (UIController.instance.Gameplay.gameObject.activeInHierarchy)
-            {
-                PlayBackgroundSound(listMusicGamePlay);
-            }
-            else
-            {
-                PlayBackgroundSound(listMusicMainMenu);
-            }
-        }
-        else
-        {
-            StopBackgroundSound();
-        }
-    }
-
+    }    
 
     #region Control Sound UI
 

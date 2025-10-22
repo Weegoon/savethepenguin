@@ -51,6 +51,10 @@ public class Level : MonoBehaviour
         scoreIndex = 0;
         isLose = false;
 
+        itemDrops.Clear();
+
+        PlayerPenguin.ResetToOriginal();
+
         UIController.instance.Gameplay.UpdateLifeUI();
         UIController.instance.Gameplay.UpdateScoreUI();
 
@@ -60,6 +64,8 @@ public class Level : MonoBehaviour
             coSpawnItem = null;
         }
         coSpawnItem = StartCoroutine(IESpawnItem());
+
+        SoundManager.instance.PlayBackgroundSound(SoundManager.instance.listMusicGamePlay);
     }
 
     public void OnEndGame()
@@ -81,14 +87,14 @@ public class Level : MonoBehaviour
     float GetTimeToSpawnItem()
     {
         if (CurrentScore < 100f)
-            return 3;
-        else if (CurrentScore < 200f)
-            return 2.5f;
+            return 4;
         else if (CurrentScore < 300f)
+            return 3f;
+        else if (CurrentScore < 500f)
             return 2f;
-        else if (CurrentScore < 400f)
-            return 1.5f;
-        else return 1f;
+        else if (CurrentScore < 700f)
+            return 1f;
+        else return 0.5f;
     }
 
     void SpawnItem()
@@ -103,8 +109,11 @@ public class Level : MonoBehaviour
         {
             GameObject obj = Instantiate(TrapPrefab, transform);
             obj.transform.position = new Vector3(Random.Range(-2.2f, 2.2f), 2.5f, 0);
+            itemDrops.Add(obj);
         }
     }
+
+    public List<GameObject> itemDrops = new List<GameObject>();
 
     public void EarnItem()
     {
@@ -147,13 +156,30 @@ public class Level : MonoBehaviour
     {
         CurrentLife -= 1;
         UIController.instance.Gameplay.UpdateLifeUI();
+
+        for (int i = itemDrops.Count - 1; i >= 0; i--)
+        {
+            Destroy(itemDrops[i]);
+        }
+
         if (CurrentLife <= 0)
-            DoLose();
+        {
+            CurrentLife = 0;
+            Utility.Delay(this, delegate
+            {
+                SoundManager.instance.PlayAudioClip(SoundManager.instance.loseSound);
+                Utility.Delay(this, delegate
+                {
+                    DoLose();
+                }, 3f);
+            }, 1f);
+            
+        }
     }
 
     public void DoLose()
     {
-        CurrentLife = 0;
+        
         UIController.instance.MainMenu.OnOpen();
         UIController.instance.Gameplay.OnClose();
     }

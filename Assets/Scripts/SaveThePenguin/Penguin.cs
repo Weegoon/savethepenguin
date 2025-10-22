@@ -86,6 +86,15 @@ public class Penguin : MonoBehaviour
         }
     }
 
+    public void ResetToOriginal()
+    {
+        isDie = false;
+        rb.velocity = Vector2.zero;
+        transform.eulerAngles = Vector3.zero;
+        transform.position = new Vector3(0, -3.486f, 0);
+        jumpAnim.DOPause();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("HeartItem"))
@@ -127,11 +136,14 @@ public class Penguin : MonoBehaviour
         transform.DORotate(new Vector3(0, 0, -90f), 0.1f);
 
         Utility.Delay(this, delegate
-        {            
-            transform.DORotate(new Vector3(0, 0, 0f), 0.1f).OnComplete(() =>
+        {
+            if (UIController.instance.Levelplay.CurrentLife > 0)
             {
-                isDie = false;
-            });
+                transform.DORotate(new Vector3(0, 0, 0f), 0.1f).OnComplete(() =>
+                {
+                    isDie = false;
+                });
+            }                
         }, 2f);
     }
 }

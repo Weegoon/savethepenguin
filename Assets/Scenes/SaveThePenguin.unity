@@ -456,8 +456,8 @@ Transform:
   m_GameObject: {fileID: 190481959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 0}
-  m_LocalScale: {x: 0.22262277, y: 0.36253402, z: 0.3366}
+  m_LocalPosition: {x: 0, y: -6.47, z: 0}
+  m_LocalScale: {x: 0.22262277, y: 0.42329472, z: 0.3366}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 419196452}
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LaddleObj: {fileID: 190481959}
   OriginalPos: {x: 0, y: -6, z: 0}
-  AddedValue: 0.5
+  AddedValue: 0.6
 --- !u!1 &245915778
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +911,7 @@ MonoBehaviour:
   CurrentLife: 0
   scoreIndex: 0
   IsReachPerfectScore: 0
+  itemDrops: []
 --- !u!1 &422348998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,7 +2384,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 241}
   m_SizeDelta: {x: 911.2825, y: 791.4973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1251526663
@@ -3177,18 +3178,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc15e7a9b901cc47a9102761d3e9589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listMusicGamePlay: []
-  listMusicMainMenu: []
-  listMusicSelectLevel: []
-  listMusicRoom: []
+  listMusicGamePlay:
+  - {fileID: 8300000, guid: 692473fcfe0b938489eaf81b5f51cd30, type: 3}
+  - {fileID: 8300000, guid: 86ddaf13f7df97b42b2b7b3720f62bd2, type: 3}
   audioSource: {fileID: 1000520448}
   backgroundSound: {fileID: 419082242}
   winSound: {fileID: 0}
-  loseSound: {fileID: 0}
-  trapFall: {fileID: 0}
-  trapHit: {fileID: 0}
-  earnItem: {fileID: 0}
-  haveSound: 0
+  loseSound: {fileID: 8300000, guid: 42c8b0d9f37409f4c876aa196472f244, type: 3}
+  trapFall: {fileID: 8300000, guid: fb921066f882d5d40b690fba0feaa029, type: 3}
+  trapHit: {fileID: 8300000, guid: 79dc69c5df182eb479be1b15329c3305, type: 3}
+  earnItem: {fileID: 8300000, guid: 525734d96600c3148a0c064fdceb5ae6, type: 3}
+  haveSound: 1
 --- !u!4 &1932374046
 Transform:
   m_ObjectHideFlags: 0
@@ -3379,7 +3379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPlay: {fileID: 419196450}
-  tutorialObj: {fileID: 0}
+  tutorialObj: {fileID: 1420504090}
   heartObjs:
   - {fileID: 1384534096}
   - {fileID: 258477008}
@@ -3402,7 +3402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2132547136
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3900,7 +3900,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7146314171622012054}
-  - component: {fileID: 7146314171622012055}
   m_Layer: 2
   m_Name: Noel_Theme
   m_TagString: Untagged
@@ -3932,18 +3931,6 @@ Transform:
   - {fileID: 1144296943}
   m_Father: {fileID: 607398684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7146314171622012055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7146314171622012049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef04a7c15cf8d22498f37e2a76f13027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7146314171697873157
 GameObject:
   m_ObjectHideFlags: 0

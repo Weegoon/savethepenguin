@@ -11,11 +11,15 @@ public class ItemDrop : MonoBehaviour
     {
         Utility.Delay(this, delegate
         {
+            if (UIController.instance.Levelplay.itemDrops.Contains(gameObject))
+                UIController.instance.Levelplay.itemDrops.Remove(gameObject);
             Destroy(gameObject);
         }, 10f);
 
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
+
+        SoundManager.instance.PlayAudioClip(SoundManager.instance.trapFall);
 
         StartCoroutine(IEShowHide());
     }
@@ -31,6 +35,15 @@ public class ItemDrop : MonoBehaviour
                 img.color = new Color32(0, 0, 0, 0);
             yield return new WaitForSeconds(0.1f);
         }
-        rb.gravityScale = 0.5f;
+        
+        if (UIController.instance.Levelplay.CurrentScore < 100f)
+            rb.gravityScale = 0.5f;
+        else if (UIController.instance.Levelplay.CurrentScore < 300f)
+            rb.gravityScale = 0.55f;
+        else if (UIController.instance.Levelplay.CurrentScore < 500f)
+            rb.gravityScale = 0.6f;
+        else if (UIController.instance.Levelplay.CurrentScore < 700f)
+            rb.gravityScale = 0.65f;
+        else rb.gravityScale = 0.7f;
     }
 }
