@@ -39,11 +39,11 @@ public class ItemDrop : MonoBehaviour
         if (UIController.instance.Levelplay.CurrentScore < 100f)
             rb.gravityScale = 0.5f;
         else if (UIController.instance.Levelplay.CurrentScore < 300f)
-            rb.gravityScale = 0.55f;
+            rb.gravityScale = 0.7f;
         else if (UIController.instance.Levelplay.CurrentScore < 500f)
-            rb.gravityScale = 0.6f;
+            rb.gravityScale = 1f;
         else if (UIController.instance.Levelplay.CurrentScore < 700f)
-            rb.gravityScale = 0.65f;
-        else rb.gravityScale = 0.7f;
+            rb.gravityScale = 1.5f;
+        else rb.gravityScale = 2f;
     }
 }

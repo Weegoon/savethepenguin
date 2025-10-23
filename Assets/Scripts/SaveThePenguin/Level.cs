@@ -13,6 +13,8 @@ public class Level : MonoBehaviour
 
     public GameObject TargetPenguin;
 
+    public GameObject TargetPenguin_Back;
+
     public List<Transform> PenguinPaths;
 
     public Laddle Laddle;
@@ -28,7 +30,7 @@ public class Level : MonoBehaviour
     public bool IsReachPerfectScore;
 
     bool isLose;
-    Vector3 originalPenguinPos;
+    public Vector3 originalPenguinPos;
 
     Coroutine coSpawnItem;
 
@@ -36,11 +38,6 @@ public class Level : MonoBehaviour
     {
         get => PlayerPrefs.GetInt("HighScore", 0);
         set => PlayerPrefs.SetInt("HighScore", value);
-    }
-
-    private void Start()
-    {
-        originalPenguinPos = TargetPenguin.transform.position;
     }
 
     public void OnStartGame()
@@ -52,6 +49,9 @@ public class Level : MonoBehaviour
         isLose = false;
 
         itemDrops.Clear();
+
+        TargetPenguin.transform.position = originalPenguinPos;
+        TargetPenguin_Back.SetActive(false);
 
         PlayerPenguin.ResetToOriginal();
 
@@ -149,6 +149,15 @@ public class Level : MonoBehaviour
             TargetPenguin.transform.position = originalPenguinPos;
             Laddle.PlaceLaddle();
             IsReachPerfectScore = false;
+        }).OnWaypointChange(index =>
+        {
+            Debug.Log("index " + index);
+
+            if (index == 1)
+            {
+                TargetPenguin_Back.SetActive(true);
+            }
+            else TargetPenguin_Back.SetActive(false);
         });
     }
 
